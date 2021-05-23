@@ -6,6 +6,13 @@ public class Fare {
     private static final double FARE_PER_KM = 100;
     private static final int FIRST_OVER_FARE_DISTANCE = 10;
     private static final int SECOND_OVER_FARE_DISTANCE = 50;
+    private static final int REQUIRED_MIN_FARE = 350;
+    private static final int MIN_KID_AGE = 6;
+    private static final int MIN_TEENAGER_AGE = 13;
+    private static final int MIN_ADULT_AGE = 19;
+    private static final double KID_DISCOUNT_RATE = 0.5;
+    private static final double TEENAGER_DISCOUNT_RATE = 0.2;
+    private static final double ADULT_DISCOUNT_RATE = 0;
 
     private double fare;
 
@@ -35,17 +42,17 @@ public class Fare {
     }
 
     private double calculateAgeDiscount(double fare, int age) {
-        return fare - ((fare - 350) * discountValue(age));
+        return fare - ((fare - REQUIRED_MIN_FARE) * discountValue(age));
     }
 
     public double discountValue(int age) {
-        if (age >= 6 && age < 13) {
-            return 0.5;
+        if (age >= MIN_KID_AGE && age < MIN_TEENAGER_AGE) {
+            return KID_DISCOUNT_RATE;
         }
-        if (age >= 13 && age < 19) {
-            return 0.2;
+        if (age >= MIN_TEENAGER_AGE && age < MIN_ADULT_AGE) {
+            return TEENAGER_DISCOUNT_RATE;
         }
-        return 0;
+        return ADULT_DISCOUNT_RATE;
     }
 
     public double fare() {
