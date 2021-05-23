@@ -25,4 +25,11 @@ public class LoginMember {
     public Integer getAge() {
         return age;
     }
+
+    public int age() {
+        if (age == null) {
+            return 0;
+        }
+        return age;
+    }
 }
